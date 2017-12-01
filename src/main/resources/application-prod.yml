@@ -1,0 +1,3 @@
+# 服务端口server:server:
+server:
+  port: 3333
