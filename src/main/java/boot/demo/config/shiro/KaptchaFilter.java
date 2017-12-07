@@ -52,13 +52,13 @@ public class KaptchaFilter extends FormAuthenticationFilter {
         //System.out.println("KaptchaFilter.doCaptchaValidate");
 
         //session中的图形码字符串
-        String captcha = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+//        String captcha = (String) request.getSession().getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
         //System.out.println("session中的图形码字符串:"+captcha);
 
-        //比对
-        if (captcha == null || !captcha.equalsIgnoreCase(token.getCaptcha())) {
-            throw new IncorrectCaptchaException();
-        }
+//        //比对
+//        if (captcha == null || !captcha.equalsIgnoreCase(token.getCaptcha())) {
+//            throw new IncorrectCaptchaException();
+//        }
     }
 
     @Override

@@ -5,6 +5,10 @@ package boot.demo;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,17 @@ public class ApplicationTests {
 	public void test1() throws Exception {
 //		User user = userService.findByName("测试");
 //		System.out.println(user);
+		String algorithmName = "MD5";
+		String username = "zj";
+		String password = "123456";
+		String salt1 = username;
+		String salt2 = "xiaojiang";
+		int hashIterations = 2;
+//		SimpleHash hash = new SimpleHash(algorithmName, password,  ByteSource.Util.bytes(salt1 + salt2), hashIterations);
+//		String encodedPassword = hash.toHex();
+//		System.out.println(encodedPassword);
+		System.out.println( ByteSource.Util.bytes(salt1 + salt2));
+
 	}
 
 }

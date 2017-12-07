@@ -1,12 +1,10 @@
 package boot.demo.service.impl;
 
-import boot.demo.dao.master.ManagerInfoDAO;
+import boot.demo.dao.master.ManagerInfoMapper;
 import boot.demo.entity.bo.ManagerRoleBO;
 import boot.demo.service.ShiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.Serializable;
 
 /**
  * SHIRO自定义判断
@@ -18,10 +16,10 @@ import java.io.Serializable;
 public class ShiroServiceImpl implements ShiroService{
 
     @Autowired
-    ManagerInfoDAO managerInfoDAO;
+    ManagerInfoMapper managerInfoMapper;
 
     @Override
     public ManagerRoleBO findByUsername(String username) {
-        return managerInfoDAO.findByUsername(username);
+        return managerInfoMapper.findByUsername(username);
     }
 }

@@ -4,9 +4,8 @@ import boot.demo.entity.bo.ManagerRoleBO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-@Mapper
 @Repository
-public interface ManagerInfoDAO {
+public interface ManagerInfoMapper {
      ManagerRoleBO findByUsername(@Param("username") String username);
 
 }

@@ -48,16 +48,15 @@ public class ShiroConfiguration {
 //        shiroFilterFactoryBean.setFilters(filtersMap);
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/login/welcome");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        shiroFilterFactoryBean.setSuccessUrl("/login/index");
         // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-
+        shiroFilterFactoryBean.setUnauthorizedUrl("/login/403");
         // 拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/login","anon");
+        filterChainDefinitionMap.put("/login/welcome","authc");
         filterChainDefinitionMap.put("/ajaxLogin", "anon");
 
         // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
@@ -66,7 +65,7 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/add", "perms[权限添加]");
         //开放的静态资源
         filterChainDefinitionMap.put("/favicon.ico", "anon");//网站图标
-//        filterChainDefinitionMap.put("/AdminLTE-2.3.7/**", "anon");//配置static文件下资源能被访问的，这是个例子
+        filterChainDefinitionMap.put("/*.css", "anon");//配置static文件下资源能被访问的，这是个例子
 
         filterChainDefinitionMap.put("/kaptcha.jpg", "anon");//图片验证码(kaptcha框架)
 
@@ -93,7 +92,7 @@ public class ShiroConfiguration {
         //注入缓存管理器;  注意:开发时请先关闭，如不关闭热启动会报错
         //securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
         //注入记住我管理器;
-        securityManager.setRememberMeManager(rememberMeManager());
+//        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
     }
 
@@ -109,7 +108,7 @@ public class ShiroConfiguration {
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("MD5");// 散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);// 散列的次数，比如散列两次，相当于md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(2);// 散列的次数，比如散列两次，md5(md5(""));
         hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);//表示是否存储散列后的密码为16进制，需要和生成密码时的一样，默认是base64；
         return hashedCredentialsMatcher;
     }

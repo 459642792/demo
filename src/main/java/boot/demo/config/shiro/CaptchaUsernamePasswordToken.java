@@ -2,15 +2,6 @@ package boot.demo.config.shiro;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
-/**
- * Created with IntelliJ IDEA.
- * packageName  : com.xuezhijian.shiro
- * Company      : 彼得科技
- * User         : zj
- * Date         : 17/2/13
- * Time         : 下午11:30
- * Description  : 拓展登陆验证字段
- */
 public class CaptchaUsernamePasswordToken extends UsernamePasswordToken {
 
     private static final long serialVersionUID = 1L;

@@ -2,21 +2,30 @@ package boot.demo.web;
 
 
 import boot.demo.config.shiro.IncorrectCaptchaException;
+import boot.demo.entity.po.ManagerInfoPO;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.Manager;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping
+@RequestMapping("/login")
 public class LoginController {
 
 
@@ -26,9 +35,15 @@ public class LoginController {
     public String login() {
         return "login";
     }
-
+    @RequestMapping(value="/welcome", method = RequestMethod.GET)
+    public String welcome() {
+        Map<String, Object> model = new HashMap<>();
+        model.put("time", new Date());
+        model.put("message","dadfadf");
+        return "welcome";
+    }
     // 登录提交地址和applicationontext-shiro.xml配置的loginurl一致。 (配置文件方式的说法)
-    @RequestMapping(value = "/loginIndex", method = RequestMethod.POST)
+    @RequestMapping(value = "/welcome", method = RequestMethod.POST)
     public String login(HttpServletRequest request, Map<String, Object> map)
             throws Exception {
 
@@ -36,21 +51,24 @@ public class LoginController {
         Object exception = request.getAttribute("shiroLoginFailure");
         String msg = "";
         if (exception != null){
-            if (UnknownAccountException.class.isInstance(exception)) {
+            if (UnknownAccountException.class.getName().equals(exception)) {
                 msg = "提示->账号不存在";
-            } else if (IncorrectCredentialsException.class.isInstance(exception)) {
+            } else if (IncorrectCredentialsException.class.getName().equals(exception)) {
                 msg = "提示->密码不正确";
-            } else if (IncorrectCaptchaException.class.isInstance(exception)) {
+            } else if (IncorrectCaptchaException.class.getName().equals(exception)) {
                 msg = "提示->验证码不正确";
             } else {
                 msg = "提示->未知错误";
             }
             map.put("msg", msg);
-            return "login";
+            return "welcome";
         }
         //如果已经登录，直接跳转主页面
         return "index";
     }
+
+
+
 
     //主页
     @RequestMapping({"/","/index"})
