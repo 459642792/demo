@@ -1,6 +1,10 @@
 spring:
-  freemarker:
-    cache: false
+#  freemarker:
+#    cache: false
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
   profiles:
     active: dev
   jpa:
@@ -11,6 +15,11 @@ spring:
           auto: create
   jmx:
     default-domain: master
+    # 默认值为 /**
+#    spring.mvc.static-path-pattern=
+#    spring-boot默认跳转地址是 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  resources:
+    static-locations: /WEB-INF/
   datasource:
     master:
       url: jdbc:mysql://localhost:3306/master?characterEncoding=utf-8&allowMultiQueries=true&tinyInt1isBit=false&allowMultiQueries=true

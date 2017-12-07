@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="boot.demo.dao.master.SysRoleDAO">
+<mapper namespace="boot.demo.dao.master.SysRoleMapper">
     <resultMap id="roleResultMap" type="boot.demo.entity.po.SysRolePO">
         <result column="rid"  property="id"/>
         <result column="role"  property="role"/>
@@ -18,12 +18,12 @@
         <result column="salt" property="salt" />
         <result column="state" property="state" />
     </resultMap>
-    <resultMap id=" RPResultMap" type="boot.demo.entity.bo.RmpBO" extends="roleResultMap">
+    <resultMap id="RPResultMap" type="boot.demo.entity.bo.RmpBO" extends="roleResultMap">
         <collection property="managerInfos" resultMap="ManagerResultMap"> </collection>
         <collection property="permissions" resultMap="PermissionResultMap"> </collection>
     </resultMap>
 
-    <select id="findByRole" resultMap="RMPResultMap">
+    <select id="findByRole" resultMap="RPResultMap">
        SELECT SR.id AS rid,SR.role,SR.description,m.id AS mid,m.username,m.`name`,m.`password`,m.salt,m.state,SP.id AS pid,SP.permission  FROM sys_role SR
        LEFT JOIN manager_role_relationship MRR ON SR.id = MRR.role_Id
        JOIN manager_info M ON MRR.manager_Id = M.id
