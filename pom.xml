@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 
 		<druid>1.0.18</druid>
 		<mybatis-spring-boot>1.2.0</mybatis-spring-boot>
@@ -42,6 +42,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
 
 		<!-- Spring Boot Test 依赖 -->
 		<dependency>
@@ -71,10 +72,10 @@
 			<version>${druid}</version>
 		</dependency>
 		<!--redis 缓存管理-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-redis</artifactId>-->
+		<!--</dependency>-->
 
 		<!--启动 thymeleaf 画 页面,最好不要用jsp 很多内置信息不支持-->
 		<!--<dependency>-->
@@ -133,7 +134,12 @@
 			<artifactId>shiro-ehcache</artifactId>
 			<version>${shiro-spring-version}</version>
 		</dependency>
-		<!-- Junit -->
+
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>5.6.3</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -182,9 +188,9 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>java7</id>
+			<id>java8</id>
 			<activation>
-				<jdk>7</jdk>
+				<jdk>8</jdk>
 			</activation>
 			<build>
 				<plugins>

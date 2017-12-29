@@ -135,7 +135,7 @@ public class ShiroConfiguration {
     @Bean
     public EhCacheManager ehCacheManager(){
         EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+        cacheManager.setCacheManagerConfigFile("classpath:SearchConfig/ehcache-shiro.xml");
         return cacheManager;
     }
     /**
