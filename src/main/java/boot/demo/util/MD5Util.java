@@ -1,4 +1,4 @@
-package boot.demo.util.alibaba;
+package boot.demo.util;
 
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
