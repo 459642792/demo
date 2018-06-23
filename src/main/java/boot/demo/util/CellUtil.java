@@ -1,5 +1,8 @@
 package com.yun9.biz.report.provider.util;
 
+import org.apache.poi.hssf.usermodel.*;
+
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,9 +117,65 @@ public class CellUtil {
     }
 
 
-    public static void main(String[] args) {
-        List<String> str = parseExpression("a",5);
-        System.out.println(str.toString());
+    public static void main(String[] args) throws  Exception{
+//        //创建工作簿对象
+//        HSSFWorkbook wb=new HSSFWorkbook();
+//        //创建工作表对象
+//        HSSFSheet sheet=wb.createSheet("我的工作表");
+//        //创建绘图对象
+//        HSSFPatriarch p=sheet.createDrawingPatriarch();
+//        //创建单元格对象,批注插入到4行,1列,B5单元格
+//        HSSFCell cell=sheet.createRow(4).createCell(1);
+//        //插入单元格内容
+//        cell.setCellValue(new HSSFRichTextString("批注"));
+//        //获取批注对象
+//        //(int dx1, int dy1, int dx2, int dy2, short col1, int row1, short col2, int row2)
+//        //前四个参数是坐标点,后四个参数是编辑和显示批注时的大小.
+//        HSSFComment comment=p.createComment(new HSSFClientAnchor(0,0,0,0,(short)3,3,(short)5,6));
+//        //输入批注信息
+//        comment.setString(new HSSFRichTextString("插件批注成功!插件批注成功!插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功插件批注成功"));
+//        //添加作者,选中B5单元格,看状态栏
+//        comment.setAuthor("toad");
+//        //将批注添加到单元格对象中
+//        cell.setCellComment(comment);
+//        //创建输出流
+//        FileOutputStream out=new FileOutputStream("E:\\writerPostil.xls");
+//
+//        wb.write(out);
+//        //关闭流对象
+//        out.close();
+
+        List<A> list = new ArrayList<A>(){{
+            add(new A(1,1));
+            add(new A(1,1));
+            add(new A(2,1));
+        }};
+        System.out.println(list.stream().filter(k->k.getId()==2 || k.getId()==1).map(A::getId).distinct().count());
     }
+  public static class  A{
+        int id;
+        int num;
+
+      public int getId() {
+          return id;
+      }
+
+      public void setId(int id) {
+          this.id = id;
+      }
+
+      public int getNum() {
+          return num;
+      }
+
+      public void setNum(int num) {
+          this.num = num;
+      }
+
+      public A(int id, int num) {
+          this.id = id;
+          this.num = num;
+      }
+  }
 
 }
