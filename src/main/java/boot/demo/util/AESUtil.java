@@ -150,6 +150,7 @@ public class AESUtil {
         String str;
         List<Integer> list;
         Integer num;
+        Integer section;
 
         public MaYi(String name) {
             this.name = name;
@@ -176,8 +177,11 @@ public class AESUtil {
                 if (mapBill.containsKey(list.toString())) {
                     m1.setNum(mapBill.get(m1.getStr()).getNum() + 1);
                 }
+                list = list.stream().sorted((A1, A2) -> A2 - A1).collect(Collectors.toList());
+                m1.setSection(list.get(5) - list.get(0));
                 mapBill.put(list.toString(), m1);
-                System.out.println("结果结果================" + mapBill.values().stream().sorted((A1, A2) -> A2.getNum() - A1.getNum()).limit(5).map(MaYi::getStr).collect(Collectors.toList()));
+                System.out.println("结果结果=====最小区间值===========" + mapBill.values().stream().sorted((A1, A2) -> A2.getSection() - A1.getSection()).limit(5).map(MaYi::getStr).collect(Collectors.toList()));
+                System.out.println("结果结果======         ==========" + mapBill.values().stream().limit(5).map(MaYi::getStr).collect(Collectors.toList()));
                 System.out.println("结果,总数=============="+mapBill.size()+"结果出现次数================" + mapBill.values().stream().sorted((A1, A2) -> A2.getNum() - A1.getNum()).limit(5).map(MaYi::getNum).collect(Collectors.toList()));
 
             }
@@ -206,6 +210,14 @@ public class AESUtil {
 
         public void setList(List<Integer> list) {
             this.list = list;
+        }
+
+        public Integer getSection() {
+            return section;
+        }
+
+        public void setSection(Integer section) {
+            this.section = section;
         }
     }
 }
